@@ -12,7 +12,7 @@ begin
     gem.authors = ["Sascha Wessel"]
     gem.require_path = 'lib'
     gem.files = %w( Rakefile ) + Dir.glob("{lib}/**/*") + %w( VERSION )
-    gem.add_dependency "yajl-ruby", ">= 0.7.8"
+    gem.add_runtime_dependency "yajl-ruby", ">= 0.7.8"
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"

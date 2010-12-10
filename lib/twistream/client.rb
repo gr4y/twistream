@@ -44,17 +44,13 @@ module TwiStream
       @thread = Thread.new do
         begin
           ::Yajl::HttpStream.post(url, params) do |status|
+            puts status
             block.call(status)
           end
         rescue
           on_error.trigger($!, $@)
         end
       end
-      @thread.run
-    end
-
-    def build_filters(filters)
-      filters[:keywords].join(',')
     end
 
     def build_uri(api_method)

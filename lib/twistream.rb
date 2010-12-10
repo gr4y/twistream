@@ -1,7 +1,6 @@
 # external require
 require 'uri'
 require 'logger'
-require 'ostruct'
 require 'yajl/http_stream'
 
 # gem files

@@ -3,7 +3,8 @@ require "spec_helper"
 describe TwiStream::Client do
 
   before :all do
-    @client = TwiStream::Client.new({:user => 'gr4y', :pass => 'bUx1kkkd'})
+    auth = YAML.load_file('auth.yml')
+    @client = TwiStream::Client.new(auth)
     @client.on_error.handle do |msg,tr|
       puts msg 
     end

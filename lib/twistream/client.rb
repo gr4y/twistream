@@ -44,7 +44,6 @@ module TwiStream
       @thread = Thread.new do
         begin
           ::Yajl::HttpStream.post(url, params) do |status|
-            puts status
             block.call(status)
           end
         rescue

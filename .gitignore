@@ -2,3 +2,4 @@
 pkg
 rdoc
 spec/auth.yml
+Gemfile.lock

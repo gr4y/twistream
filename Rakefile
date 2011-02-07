@@ -54,5 +54,5 @@ Reek::Rake::Task.new do |t|
   t.verbose = true
 end
 
-task :test => [:check_dependencies, :spec]
+task :test => [:spec]
 task :default => [:test, :build]

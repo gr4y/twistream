@@ -13,10 +13,13 @@ describe TwiStream::Client do
   context "start the filter stream, wait 10 seconds and stop" do
     it "should start the filter stream" do
       keywords = "nowplaying", "nowwatching"
-      @client.filter_by_keywords(keywords) do |status|
-        puts status
-        status.should_not == be_nil
+      @thread = Thread.new do 
+        @client.filter_by_keywords(keywords) do |status|
+          puts status
+          status.should_not == be_nil
+        end
       end
+      # @thread.join
     end
 
     it "should wait 10 seconds" do
@@ -30,10 +33,13 @@ describe TwiStream::Client do
 
   context "start the sample stream, wait 10 seconds and stop" do
     it "should start the sample stream" do
-      @client.sample do |status|
-        puts status
-        status.should_not == be_nil
+      @thread = Thread.new do 
+        @client.sample do |status|
+          puts status
+          status.should_not == be_nil
+        end
       end
+      # @thread.join
     end
 
     it "should wait 10 seconds" do

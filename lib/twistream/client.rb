@@ -50,6 +50,7 @@ module TwiStream
           on_error.trigger($!, $@)
         end
       end
+      @thread.join
     end
 
     def build_uri(api_method)

@@ -15,11 +15,10 @@ describe TwiStream::Client do
       keywords = "nowplaying", "nowwatching"
       @thread = Thread.new do 
         @client.filter_by_keywords(keywords) do |status|
-          puts status
           status.should_not == be_nil
+          puts status['id']
         end
       end
-      # @thread.join
     end
 
     it "should wait 10 seconds" do
@@ -35,11 +34,10 @@ describe TwiStream::Client do
     it "should start the sample stream" do
       @thread = Thread.new do 
         @client.sample do |status|
-          puts status
           status.should_not == be_nil
+          puts status['id']
         end
       end
-      # @thread.join
     end
 
     it "should wait 10 seconds" do

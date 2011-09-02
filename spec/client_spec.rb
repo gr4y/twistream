@@ -5,19 +5,17 @@ describe TwiStream::Client do
   before :all do
     auth = YAML.load_file('spec/auth.yml')
     @client = TwiStream::Client.new(auth)
-    @client.on_error.handle do |msg,tr|
-      puts msg 
+    @client.on_error.receive do |msg,tr|
+      raise e
     end
   end
 
-  context "start the filter stream, wait 10 seconds and stop" do
+  context "filter by keywords, wait, stop" do
     it "should start the filter stream" do
       keywords = "nowplaying", "nowwatching"
-      @thread = Thread.new do 
-        @client.filter_by_keywords(keywords) do |status|
-          status.should_not == be_nil
-          puts status['id']
-        end
+      @client.filter_by_keywords(keywords) do |status|
+        status.should_not == be_nil
+        puts status['id']
       end
     end
 
@@ -30,7 +28,7 @@ describe TwiStream::Client do
     end
   end
 
-  context "start the sample stream, wait 10 seconds and stop" do
+  context "sample, wait, stop" do
     it "should start the sample stream" do
       @thread = Thread.new do 
         @client.sample do |status|

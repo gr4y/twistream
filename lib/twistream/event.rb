@@ -6,7 +6,7 @@ module TwiStream
       @name = name
     end
 
-    def handle(method=nil, & block)
+    def receive(method=nil, & block)
       @handler = method if method
       @handler = block if block
     end

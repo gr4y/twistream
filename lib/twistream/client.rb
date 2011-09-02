@@ -2,8 +2,8 @@ module TwiStream
   class Client
     extend TwiStream::EventHandler
     attr_accessor :realm
-    events :on_error
-
+    events :on_error, :on_start
+    
     def initialize(auth)
       self.realm = "#{auth[:user]}:#{auth[:pass]}".chomp
     end
@@ -32,25 +32,24 @@ module TwiStream
       start(:filter, :locations => params.join(','), & block)
     end
 
-    def stop
-      if @thread.alive?
-        @thread.kill
+    def stop 
+      if @stream.alive?
+        @stream.kill
       end
     end
 
     private
     def start(api_method, params = {}, & block)
       url = build_uri(api_method)
-      @thread = Thread.new do
-        begin
+      begin
+        @stream = Thread.new do 
           ::Yajl::HttpStream.post(url, params) do |status|
             block.call(status)
           end
-        rescue
-          on_error.trigger($!, $@)
         end
+      rescue 
+        on_error.trigger($!, $@)
       end
-      @thread.join
     end
 
     def build_uri(api_method)

@@ -1,5 +1,4 @@
 .idea
 pkg
-rdoc
+*doc
 spec/auth.yml
-Gemfile.lock

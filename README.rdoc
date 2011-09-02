@@ -1,5 +1,0 @@
-= twistream
-
-== what?
-
-twistream is an simple client for hooking up with the twitter streaming api
